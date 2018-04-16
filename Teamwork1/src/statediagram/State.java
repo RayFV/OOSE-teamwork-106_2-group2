@@ -46,7 +46,9 @@ public class State extends Component implements Serializable{
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
+		setBoundary();
 		g.setColor(getColor());
+		
 		FontMetrics fm = g.getFontMetrics();
 		double textWidth = fm.getStringBounds(getText(), g).getWidth();
 		
@@ -71,19 +73,11 @@ public class State extends Component implements Serializable{
     }
 	
 	
-	
 	public boolean checkPoint(Point p) {		//�T�{�ƹ��I���B�O�_�b�Ϥ��d��
 		return this.b.contains(p);
 	}
 	
 	public boolean checkLinePoint(Point p) {return false;}
-
-	public void setCenteredText(String s, int w, int h, Graphics g) {
-		FontMetrics fm = g.getFontMetrics();
-		int x = (w - fm.stringWidth(s)) / 2;
-		int y = (fm.getAscent() + (h - (fm.getAscent() + fm.getDescent())) / 2);
-		g.drawString(s, x, y);
-	}
 	
 	@Override
 	public void changePoint(Point p) {
