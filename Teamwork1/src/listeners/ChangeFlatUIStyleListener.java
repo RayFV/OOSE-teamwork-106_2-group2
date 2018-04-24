@@ -3,8 +3,8 @@ package listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import guiStrategy.FlatUI;
 import mediator.ViewMediator;
+import strategy.FlatUI;
 
 public class ChangeFlatUIStyleListener implements ActionListener{
 

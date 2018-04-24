@@ -1,12 +1,12 @@
-package strategy;
+package flyweight;
 
 import java.awt.Color;
 
-public class OrangeColorStrategy implements ColorStrategy{
+public class PinkColor implements ColorFlyweight{
 
 	private int r = 255;
-	private int g = 165;
-	private int b = 40;
+	private int g = 192;
+	private int b = 203;
 	
 	@Override
 	public Color handle() {

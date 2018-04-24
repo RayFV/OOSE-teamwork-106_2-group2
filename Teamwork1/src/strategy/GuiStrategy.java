@@ -1,4 +1,4 @@
-package guiStrategy;
+package strategy;
 
 import java.awt.Color;
 

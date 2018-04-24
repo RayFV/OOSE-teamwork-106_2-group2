@@ -3,7 +3,6 @@ package statediagram;
 import memento.ObjectStatusMemento;
 import observer.Observer;
 import observer.Subject;
-import strategy.ColorStrategy;
 import mediator.ModelMediator;
 
 import java.awt.Color;
@@ -11,6 +10,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Date;
+
+import flyweight.ColorFlyweight;
 
 
 /**

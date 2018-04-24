@@ -48,31 +48,31 @@ public class ColorFactory {
 	}
 
 	public Color createNewColor(String color) {
-		ColorStrategy colorStrategy = null;
+		ColorFlyweight colorStrategy = null;
 		switch (color.toLowerCase().trim()) {
 			case "black":
-				colorStrategy = new BlackColorStrategy();
+				colorStrategy = new BlackColor();
 				break;
 			case "mikugreen":
-				colorStrategy = new MikuGreenColorStrategy();
+				colorStrategy = new MikuGreenColor();
 				break;
 			case "yellow":
-				colorStrategy = new YellowColorStrategy();
+				colorStrategy = new YellowColor();
 				break;
 			case "pink":
-				colorStrategy = new PinkColorStrategy();
+				colorStrategy = new PinkColor();
 				break;
 			case "red":
-				colorStrategy = new RedColorStrategy();
+				colorStrategy = new RedColor();
 				break;
 			case "blue":
-				colorStrategy = new BlueColorStrategy();
+				colorStrategy = new BlueColor();
 				break;
 			case "orange":
-				colorStrategy = new OrangeColorStrategy();
+				colorStrategy = new OrangeColor();
 				break;
 			default:
-				colorStrategy = new BlackColorStrategy();
+				colorStrategy = new BlackColor();
 				break;
 		}
 		result = colorStrategy.handle();

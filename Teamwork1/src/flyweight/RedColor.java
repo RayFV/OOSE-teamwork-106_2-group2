@@ -1,8 +1,8 @@
-package strategy;
+package flyweight;
 
 import java.awt.Color;
 
-public class RedColorStrategy implements ColorStrategy{
+public class RedColor implements ColorFlyweight{
 
 	private int r = 240;
 	private int g = 40;

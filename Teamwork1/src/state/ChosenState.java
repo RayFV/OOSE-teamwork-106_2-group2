@@ -12,7 +12,7 @@ public class ChosenState implements MouseState{
 	//singleton
 	private static ChosenState instance = null;
 	private String text = "State";
-	public ChosenState() {}
+	private ChosenState() {}
 
 	public static ChosenState getInstance() {
 		System.out.println("Curernt Mouse State: state");

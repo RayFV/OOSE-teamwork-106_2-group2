@@ -28,10 +28,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import guiStrategy.FlatUI;
-import guiStrategy.GuiStrategy;
 import mediator.ViewMediator;
 import net.miginfocom.swing.MigLayout;
+import strategy.FlatUI;
+import strategy.GuiStrategy;
+
 import java.awt.SystemColor;
 
 public class StateDiagramEditor extends JFrame{

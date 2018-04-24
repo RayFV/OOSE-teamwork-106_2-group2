@@ -15,7 +15,7 @@ public class ChosenTransition implements MouseState{
 	private Component s2;		//�����y��
 	private String text = "Transition";
 	
-	public ChosenTransition() {}
+	private ChosenTransition() {}
 
 	public static ChosenTransition getInstance() {
 

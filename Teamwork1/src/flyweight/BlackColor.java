@@ -1,12 +1,12 @@
-package strategy;
+package flyweight;
 
 import java.awt.Color;
 
-public class BlueColorStrategy implements ColorStrategy{
+public class BlackColor implements ColorFlyweight{
 
-	private int r = 40;
+	private int r = 0;
 	private int g = 40;
-	private int b = 225;
+	private int b = 40;
 	
 	@Override
 	public Color handle() {

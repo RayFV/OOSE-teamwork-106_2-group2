@@ -14,7 +14,7 @@ public class ChosenSelect implements MouseState{
 	private Component deCheck = null;
 	private String text = "Select";
 			
-	public ChosenSelect() {}
+	private ChosenSelect() {}
 
 	public static ChosenSelect getInstance() {
 		System.out.println("Curernt Mouse State: select");

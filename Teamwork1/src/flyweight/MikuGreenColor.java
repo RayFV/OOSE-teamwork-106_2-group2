@@ -1,8 +1,8 @@
-package strategy;
+package flyweight;
 
 import java.awt.Color;
 
-public class MikuGreenColorStrategy implements ColorStrategy{
+public class MikuGreenColor implements ColorFlyweight{
 
 	private int r = 57;
 	private int g = 197;

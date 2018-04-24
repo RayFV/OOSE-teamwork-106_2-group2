@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import guiStrategy.DarkUI;
 import mediator.ViewMediator;
+import strategy.DarkUI;
 
 
 public class ChangeDarkUIStyleListener implements ActionListener{
