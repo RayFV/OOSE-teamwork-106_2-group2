@@ -19,7 +19,7 @@ public class ChosenSelect implements MouseState{
 	public static ChosenSelect getInstance() {
 		System.out.println("Curernt Mouse State: select");
 		if (instance == null) {
-			return new ChosenSelect();
+			instance = new ChosenSelect();
 		}
 		return instance;
 	}

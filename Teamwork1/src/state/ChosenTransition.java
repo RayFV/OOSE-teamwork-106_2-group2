@@ -11,8 +11,8 @@ public class ChosenTransition implements MouseState{
 	//singleton
 	private static ChosenTransition instance = null;
 	private boolean PointCheck = false;
-	private Component s1;		//�_�l�y��(s�N��StateDiagram�~����)
-	private Component s2;		//�����y��
+	private Component s1;
+	private Component s2;
 	private String text = "Transition";
 	
 	private ChosenTransition() {}
@@ -21,8 +21,7 @@ public class ChosenTransition implements MouseState{
 
 		System.out.println("Curernt Mouse State: transition");
 		if (instance == null) {
-
-			return new ChosenTransition();
+			instance = new ChosenTransition();
 		}
 
 		return instance;
