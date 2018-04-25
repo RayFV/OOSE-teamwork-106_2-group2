@@ -16,7 +16,7 @@ public class ColorFactory {
 
 	private ModelMediator mMdtr = ModelMediator.getInstance();
 
-	public ColorFactory() {
+	private ColorFactory() {
 		this.colorStringList.add("Black");
 		this.colorStringList.add("MikuGreen");
 		this.colorStringList.add("Yellow");
