@@ -5,14 +5,14 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import mediator.ModelMediator;
-import mediator.ViewMediator;
 import statediagram.Component;
 import statediagram.State;
 import statediagram.StateDiagram;
 import statediagram.Transition;
+import view.View;
 
 public class Controller {
-	ViewMediator vMdtr = ViewMediator.getInstance();
+	View vMdtr = View.getInstance();
 	ModelMediator mMdtr = ModelMediator.getInstance();
 	
 	public Controller() {

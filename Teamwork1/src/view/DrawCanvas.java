@@ -11,14 +11,13 @@ import javax.swing.JPanel;
 import listeners.MousePositionsListener;
 import listeners.MyMouseListener;
 import mediator.ModelMediator;
-import mediator.ViewMediator;
 import statediagram.Component;
 import statediagram.State;
 import statediagram.StateDiagram;
 import statediagram.Transition;
 
 public class DrawCanvas extends JPanel{
-	ViewMediator vMdtr = ViewMediator.getInstance();
+	View vMdtr = View.getInstance();
 	private Component components;
 	private float radius = 10;
 	

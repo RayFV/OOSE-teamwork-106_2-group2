@@ -7,8 +7,6 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import mediator.ViewMediator;
-
 public class StatusPanel extends JPanel{
 	private JLabel posText = new JLabel("Position: ");
 	private JLabel coordX = new JLabel("0", JLabel.RIGHT);
@@ -20,7 +18,7 @@ public class StatusPanel extends JPanel{
 	private JLabel stateText = new JLabel("Mouse State: ");
 	private JLabel selectedState = new JLabel("Select", JLabel.LEFT);
 	
-	private ViewMediator mdtr = ViewMediator.getInstance();
+	private View mdtr = View.getInstance();
 
 	public StatusPanel() {
 		this.setLayout(new FlowLayout());

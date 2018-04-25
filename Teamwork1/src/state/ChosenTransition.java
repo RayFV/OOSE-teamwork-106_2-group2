@@ -2,10 +2,10 @@ package state;
 
 import java.awt.event.MouseEvent;
 
-import mediator.ViewMediator;
 import memento.MementoCaretaker;
 import statediagram.Component;
 import statediagram.StateDiagram;
+import view.View;
 
 public class ChosenTransition implements MouseState{
 	//singleton
@@ -30,7 +30,7 @@ public class ChosenTransition implements MouseState{
 	}
 
 	@Override
-	public void mouseClicked(ViewMediator vMdtr, MouseEvent e) {
+	public void mouseClicked(View vMdtr, MouseEvent e) {
 		// TODO Auto-generated method stub
 		StateDiagram sd = vMdtr.getStateDiagram();
 		this.clickedLoopCheck(vMdtr, sd, e);
@@ -42,7 +42,7 @@ public class ChosenTransition implements MouseState{
 			vMdtr.changeState(ChosenSelect.getInstance());
 		}
 	}
-	private void clickedLoopCheck(ViewMediator vMdtr, Component sd, MouseEvent e) {
+	private void clickedLoopCheck(View vMdtr, Component sd, MouseEvent e) {
 		for(Component de : sd.getComponentList()) {
 			if (de instanceof StateDiagram) {
 				this.clickedLoopCheck(vMdtr, de, e);
@@ -65,19 +65,19 @@ public class ChosenTransition implements MouseState{
 	}
 
 	@Override
-	public void mousePressed(ViewMediator vMdtr, MouseEvent e) {
+	public void mousePressed(View vMdtr, MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseReleased(ViewMediator vMdtr, MouseEvent e) {
+	public void mouseReleased(View vMdtr, MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseDragged(ViewMediator vMdtr, MouseEvent e) {
+	public void mouseDragged(View vMdtr, MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

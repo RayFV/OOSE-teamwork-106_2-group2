@@ -25,7 +25,6 @@ import javax.swing.text.DocumentFilter;
 import javax.swing.text.AbstractDocument;
 
 import listeners.ChangeGroupColorListener;
-import mediator.ViewMediator;
 
 public class SettingPanel extends JPanel{
 
@@ -48,7 +47,7 @@ public class SettingPanel extends JPanel{
 	JComboBox comboStateColor = new JComboBox();
 	JComboBox comboTransitionColor = new JComboBox();
 	
-	ViewMediator vMdtr = ViewMediator.getInstance();
+	View vMdtr = View.getInstance();
 	
 	JLabel mouseXY = new JLabel("");
 	JPanel panel_1 = new JPanel();

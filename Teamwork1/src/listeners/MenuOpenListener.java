@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFileChooser;
 
-import mediator.ViewMediator;
+import view.View;
 
 public class MenuOpenListener implements ActionListener{
-	private ViewMediator vMdtr = ViewMediator.getInstance();
+	private View vMdtr = View.getInstance();
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

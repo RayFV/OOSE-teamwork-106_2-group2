@@ -3,10 +3,10 @@ package listeners;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-import mediator.ViewMediator;
+import view.View;
 
 public class MousePositionsListener implements MouseMotionListener{
-	private ViewMediator vMdtr = ViewMediator.getInstance();
+	private View vMdtr = View.getInstance();
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {

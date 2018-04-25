@@ -3,12 +3,12 @@ package listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import mediator.ViewMediator;
 import strategy.FlatUI;
+import view.View;
 
 public class ChangeFlatUIStyleListener implements ActionListener{
 
-	ViewMediator vMdtr = ViewMediator.getInstance();
+	View vMdtr = View.getInstance();
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {

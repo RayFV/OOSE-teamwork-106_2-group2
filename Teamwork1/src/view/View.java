@@ -1,4 +1,4 @@
-package mediator;
+package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -19,31 +19,21 @@ import statediagram.Component;
 import statediagram.StateDiagram;
 import strategy.FlatUI;
 import strategy.GuiStrategy;
-import view.ButtonDelete;
-import view.ButtonEdit;
-import view.ButtonSelect;
-import view.ButtonState;
-import view.ButtonTransition;
-import view.DrawCanvas;
-import view.EditDialog;
-import view.SettingPanel;
-import view.StateDiagramEditor;
-import view.StatusPanel;
 
-public class ViewMediator {
+public class View {
 
 	//Singleton with Eager initialization 
-	private static ViewMediator vMdtr = new ViewMediator();
+	private static View vMdtr = new View();
 	private Controller controller;
 	private GuiStrategy guiStrategy;
 	private SDEDocument dc;
 	
-	private ViewMediator() {
+	private View() {
 		guiStrategy = new FlatUI();
 		dc = new DocumentOperation();
 	}
 	
-	public static ViewMediator getInstance() {
+	public static View getInstance() {
 		return vMdtr;
 	}
 	

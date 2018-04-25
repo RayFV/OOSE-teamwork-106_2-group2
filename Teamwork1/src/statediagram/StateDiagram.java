@@ -2,10 +2,9 @@ package statediagram;
 
 import memento.ObjectStatusMemento;
 import memento.StateDiagramStatusMemento;
+import view.View;
+
 import java.util.ArrayList;
-
-import mediator.ViewMediator;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -13,7 +12,7 @@ import java.lang.Error;
 
 public class StateDiagram extends Component {
 	private ArrayList<Component> componentList;
-    private ViewMediator mdtr = ViewMediator.getInstance();
+    private View mdtr = View.getInstance();
     
 	public StateDiagram() {
 		super();

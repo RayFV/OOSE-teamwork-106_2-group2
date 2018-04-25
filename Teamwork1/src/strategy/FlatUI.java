@@ -2,11 +2,11 @@ package strategy;
 
 import java.awt.Color;
 
-import mediator.ViewMediator;
+import view.View;
 
 public class FlatUI implements GuiStrategy{
 
-	ViewMediator vMdtr = ViewMediator.getInstance();
+	View vMdtr = View.getInstance();
 	
 	@Override
 	public Color changeButton() {

@@ -13,10 +13,9 @@ import listeners.MenuOpenListener;
 import listeners.RedoListener;
 import listeners.MenuSaveListener;
 import listeners.UndoListener;
-import mediator.ViewMediator;
 
 public class MenuBar extends JMenuBar{
-	ViewMediator vMdtr = ViewMediator.getInstance();
+	View vMdtr = View.getInstance();
 	
 	public MenuBar() {
 		setToolTipText("");

@@ -6,11 +6,11 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
-import mediator.ViewMediator;
+import view.View;
 
 public class MenuSaveListener implements ActionListener{
 	
-	private ViewMediator vMdtr = ViewMediator.getInstance();
+	private View vMdtr = View.getInstance();
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {

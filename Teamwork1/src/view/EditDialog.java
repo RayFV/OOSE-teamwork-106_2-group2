@@ -6,9 +6,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import mediator.ViewMediator;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Panel;
@@ -38,7 +35,7 @@ public class EditDialog extends JDialog implements ActionListener{
 	private JButton okButton;
 	private JButton cancelButton;
 	
-	private ViewMediator vMdtr = ViewMediator.getInstance();
+	private View vMdtr = View.getInstance();
 
 	/**
 	 * Create the dialog.

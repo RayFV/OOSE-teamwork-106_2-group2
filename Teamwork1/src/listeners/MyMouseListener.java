@@ -3,10 +3,10 @@ package listeners;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import mediator.ViewMediator;
+import view.View;
 
 public class MyMouseListener implements MouseListener{
-	private ViewMediator vMdtr = ViewMediator.getInstance();
+	private View vMdtr = View.getInstance();
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {

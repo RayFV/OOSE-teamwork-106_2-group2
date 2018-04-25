@@ -3,10 +3,10 @@ package listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import mediator.ViewMediator;
+import view.View;
 
 public class MenuExitListener implements ActionListener{
-	private ViewMediator vMdtr = ViewMediator.getInstance();
+	private View vMdtr = View.getInstance();
 	@Override
 	
 	public void actionPerformed(ActionEvent e) {
