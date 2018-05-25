@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 public class BorderPanel extends JPanel{
-	
 	public BorderPanel() {
 		Border bdr = init();
 		this.setBorder(bdr);

@@ -12,6 +12,8 @@ import listeners.MousePositionsListener;
 import listeners.MyMouseListener;
 import mediator.ModelMediator;
 import statediagram.Component;
+import statediagram.Decorator;
+import statediagram.Note;
 import statediagram.State;
 import statediagram.StateDiagram;
 import statediagram.Transition;
@@ -34,7 +36,6 @@ public class DrawCanvas extends JPanel{
 		super.paintComponent(g);
 
 		System.out.println(components.getColor().toString());
-		
 		components.draw(g);
 	}
 	

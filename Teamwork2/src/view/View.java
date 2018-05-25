@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JMenuItem;
 import javax.swing.JTextField;
@@ -42,11 +43,12 @@ public class View {
 	}
 	
 	//Declare
-	private ButtonState buttonState;
-	private ButtonSelect buttonSelect;
-	private ButtonTransition buttonTransition;
-	private ButtonDelete buttonDelete;
-	private ButtonEdit buttonEdit;
+	private JButton buttonState;
+	private JButton buttonSelect;
+	private JButton buttonTransition;
+	private JButton buttonAddnote;
+	private JButton buttonDelete;
+	private JButton buttonEdit;
 
 	private StateDiagramEditor mainFrame;
 	private DrawCanvas drawCanvas;
@@ -77,27 +79,32 @@ public class View {
 	
 	
 	//**************Register****************//
-	public void registerButtonState(ButtonState bState) {
+	public void registerButtonState(JButton bState) {
 		// TODO Auto-generated method stub
 		this.buttonState = bState;
 	}
 
-	public void registerButtonSelect(ButtonSelect bSelect) {
+	public void registerButtonSelect(JButton bSelect) {
 		// TODO Auto-generated method stub
 		this.buttonSelect = bSelect;
 	}
 
-	public void registerButtonTransition(ButtonTransition bTransition) {
+	public void registerButtonAddNote(JButton btnAddNote) {
+		// TODO Auto-generated method stub
+		this.buttonAddnote = btnAddNote;
+	}
+	
+	public void registerButtonTransition(JButton bTransition) {
 		// TODO Auto-generated method stub
 		this.buttonTransition = bTransition;
 	}
 
-	public void registerButtonDelete(ButtonDelete bDelete) {
+	public void registerButtonDelete(JButton bDelete) {
 		// TODO Auto-generated method stub
 		this.buttonDelete = bDelete;
 	}
 	
-	public void registerButtonEdit(ButtonEdit bEdit) {
+	public void registerButtonEdit(JButton bEdit) {
 		this.buttonEdit = bEdit;
 	}
 	
@@ -218,6 +225,16 @@ public class View {
 		System.out.println("select btn clicked");
 	}
 	
+
+	public void addNoteClick(ActionEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("Add note btn clicked");
+		int id = controller.addNote(getSelectedItemID());
+		this.setSelectedItemID(id);
+		//this.showDialog();
+		this.repaint();
+	}
+	
 	public void editClick(ActionEvent e) {
 		System.out.println("Edit btn clicked");
 		if(getSelectedItemID() != -1) {
@@ -281,12 +298,18 @@ public class View {
 	
 	//draw State
 	public void addState(MouseEvent e) {
-		controller.addState(e);
+		int id = controller.addNewState(e.getPoint());
+		this.setSelectedItemID(id);
+		this.showDialog();
+		this.repaint();
 	}
 	
 	// draw transition
 	public void addTranstion(MouseEvent e, Component s1, Component s2) {
-		controller.addTranstion(e, s1, s2);
+		int id = controller.addNewTransition(e.getPoint(), s1, s2);
+		this.setSelectedItemID(id);
+		this.showDialog();
+		this.repaint();
 	}
 	
 	//Set Selected Component Text
@@ -320,8 +343,6 @@ public class View {
 	public StateDiagram getStateDiagram() {
 		return controller.getStateDiagram();
 	}
-	
-	
 	
 	
 	//**************Mouse Event***********//
@@ -371,7 +392,7 @@ public class View {
 	//*********Draw Canvas****************//
 	public void repaint() {
 		drawCanvas.repaint();
-		controller.saveAction();
+		//controller.saveAction();
 	}
 	public void repaintWithoutSave() {
 		drawCanvas.repaint();
@@ -418,12 +439,14 @@ public class View {
 	public void buttonRefresh() {
 		// TODO Auto-generated method stub
 		if(this.selectedItemID != -1) {
+			this.buttonAddnote.setEnabled(true);
 			this.buttonDelete.setEnabled(true);
 			this.buttonEdit.setEnabled(true);
 			this.menuDelete.setEnabled(true);
 			this.menuModify.setEnabled(true);
 		}
 		else {
+			this.buttonAddnote.setEnabled(false);
 			this.buttonDelete.setEnabled(false);
 			this.buttonEdit.setEnabled(false);
 			this.menuDelete.setEnabled(false);
@@ -496,5 +519,6 @@ public class View {
 		this.settingPanel.setBackground(guiStrategy.changePanel());
 		
 	}
+
 
 }

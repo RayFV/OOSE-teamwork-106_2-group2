@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import mediator.ModelMediator;
 import statediagram.Component;
+import statediagram.Note;
 import statediagram.State;
 import statediagram.StateDiagram;
 import statediagram.Transition;
@@ -22,21 +23,6 @@ public class Controller {
 	
 	//*********************Diagram*********************//
 	
-	//draw State
-	public void addState(MouseEvent e) {
-		int id = addNewState(e.getPoint());
-		vMdtr.setSelectedItemID(id);
-		vMdtr.showDialog();
-		vMdtr.repaint();
-	}
-	
-	// draw transition
-	public void addTranstion(MouseEvent e, Component s1, Component s2) {
-		int id = addNewTransition(e.getPoint(), s1, s2);
-		vMdtr.setSelectedItemID(id);
-		vMdtr.showDialog();
-		vMdtr.repaint();
-	}
 	
 	//Set Selected Component Text
 	public void setComponentText(String text) {
@@ -166,6 +152,19 @@ public class Controller {
 
         return newTransition.getId();
     }
+    
+	public int addNote(int id) {
+		// TODO Auto-generated method stub
+		System.out.println(id);
+		Component comp = this.getComponent(id);
+		Component decorator = new Note("", comp.getPoint(), comp);
+		Component group1 = mMdtr.getGroup(1);
+        group1.add(decorator);
+        //mMdtr.removeComponent(id);
+        System.out.println(decorator.getId());
+		return decorator.getId();
+	}
+    
 
     /**
      * change group
@@ -207,9 +206,6 @@ public class Controller {
 		mMdtr.changeSize(size, vMdtr.getSelectedItemID());
 	}
 	
-	public void vMdtrRefresh() {
-		vMdtr.buttonRefresh();
-	}
     
     /**
      * get group list
@@ -228,5 +224,6 @@ public class Controller {
     public int getGroupByID() {
 		return mMdtr.getGroupByID(vMdtr.getSelectedItemID());
 	}
+
 }
 
