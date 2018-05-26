@@ -153,18 +153,7 @@ public class SettingPanel extends JPanel{
 	}
 	
 	private void easyConstraints(GridBagConstraints c, GridBagLayout gbl, JComponent comp, int w, int h, int x, int y, double wx, double wy) {
-		/*
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.fill = GridBagConstraints.NONE;
-		constraints.gridwidth = w;
-		constraints.gridheight = h;
-		constraints.gridx = x;
-		constraints.gridy = y;
-		constraints.weightx = wx;
-		constraints.weighty = wy;
-		gbl.setConstraints(Comp, constraints);
-		*/
-		c.anchor = GridBagConstraints.FIRST_LINE_START;
+				c.anchor = GridBagConstraints.FIRST_LINE_START;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets.top = 3;
 		c.insets.bottom = 0;

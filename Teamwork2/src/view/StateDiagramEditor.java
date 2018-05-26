@@ -34,10 +34,10 @@ import strategy.GuiStrategy;
 
 import java.awt.SystemColor;
 
+@SuppressWarnings("serial")
 public class StateDiagramEditor extends JFrame{
 	
-	private View vMdtr = View.getInstance();
-	//private GridBagLayout gbl = new GridBagLayout();
+	private View view = View.getInstance();
     
 	/**
 	 * Create the application.
@@ -74,29 +74,8 @@ public class StateDiagramEditor extends JFrame{
 		MenuBar menuBar = new MenuBar();
 		this.setJMenuBar(menuBar);
 
-		vMdtr.registerMainFrame(this);
-
-		/* GridBagLayout
-		getContentPane().setLayout(gbl);
-		easyConstraints(gbl, panelButton, 1, 1, 0, 0, 0.1, 0.1);
-		easyConstraints(gbl, canvas, 1, 2, 1, 0, 1.0, 1.0);
-		easyConstraints(gbl, settingPanel, 1, 1, 0, 1, 0.1, 0.1);
-		*/
+		view.registerMainFrame(this);
+		view.buttonRefresh();
 		
 	}
-	
-	
-	/*
-	private void easyConstraints(GridBagLayout GLB, JComponent Comp, int w, int h, int x, int y, double wx, double wy) {
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.fill = GridBagConstraints.BOTH;
-		constraints.gridwidth = w;
-		constraints.gridheight = h;
-		constraints.gridx = x;
-		constraints.gridy = y;
-		constraints.weightx = wx;
-		constraints.weighty = wy;
-		gbl.setConstraints(Comp, constraints);
-	}
-	*/
 }

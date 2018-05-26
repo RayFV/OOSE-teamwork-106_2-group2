@@ -3,6 +3,8 @@
 import javax.swing.SwingUtilities;
 
 import controller.Controller;
+import statediagram.Decorator;
+import statediagram.Note;
 import view.StateDiagramEditor;
 
 public class Application {
@@ -20,13 +22,13 @@ public class Application {
 	}
 	
 	public static void runApp(){
-        StateDiagramEditor view = new StateDiagramEditor();
-        view.pack();
-        view.setLocationRelativeTo(null);
+        StateDiagramEditor stateDiagramEditor = new StateDiagramEditor();
+        stateDiagramEditor.pack();
+        stateDiagramEditor.setLocationRelativeTo(null);
         Controller ctrl = new Controller();
-        ctrl.vMdtrRefresh();
-        //view.setExtendedState(JFrame.MAXIMIZED_BOTH);
         ctrl.settingColor();
-        view.setVisible(true);
+        //view.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        stateDiagramEditor.setVisible(true);
+        
     }
 }
