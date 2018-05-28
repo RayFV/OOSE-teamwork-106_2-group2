@@ -26,7 +26,7 @@ public class Application {
 	}
 	
 	public static void runApp(){
-        
+        System.out.println("Running App...");
 		View view = View.getInstance();
 		Controller controller = new Controller();
 

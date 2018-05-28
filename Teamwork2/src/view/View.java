@@ -365,6 +365,8 @@ public class View {
 	}
 	
 	public void mouseDragged(MouseEvent e) {
+
+		System.out.println("testingasdasd");
 		currentState.mouseDragged(this, e);
 	}
 
@@ -406,7 +408,7 @@ public class View {
 	//*********Draw Canvas****************//
 	public void repaint() {
 		drawCanvas.repaint();
-		//controller.saveAction();
+		controller.saveAction();
 	}
 	public void repaintWithoutSave() {
 		drawCanvas.repaint();
