@@ -392,7 +392,7 @@ public class View {
 	//*********Draw Canvas****************//
 	public void repaint() {
 		drawCanvas.repaint();
-		//controller.saveAction();
+		controller.saveAction();
 	}
 	public void repaintWithoutSave() {
 		drawCanvas.repaint();

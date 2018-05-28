@@ -8,13 +8,21 @@ public class MementoCaretaker{
     private int nowIndex;
     private ModelMediator mediator;
     private Date lastSaveTime;
+    private static MementoCaretaker instance = null;
 
-    public MementoCaretaker() {
+    private MementoCaretaker() {
         this.lastSaveTime = new Date();
         this.historyStatus = new ArrayList<ObjectStatusMemento>();
         this.nowIndex = -1;
 
         this.mediator = ModelMediator.getInstance();
+    }
+    public static MementoCaretaker getInstance() {
+        if (instance == null) {
+            instance = new MementoCaretaker();
+        }
+
+        return instance;
     }
 
     public void addMemento(ObjectStatusMemento memento) {

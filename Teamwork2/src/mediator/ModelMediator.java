@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import command.Command;
 import controller.Controller;
 import flyweight.ColorFactory;
 import observer.Observer;
@@ -14,7 +15,7 @@ import observer.StateSubject;
 import observer.TransitionSubject;
 
 public class ModelMediator {
-	private MementoCaretaker mementoCaretaker = new MementoCaretaker();
+	private Command command = null;
 	private StateDiagram stateDiagram;
 	private StateSubject stateSubject = new StateSubject();
 	private TransitionSubject transitionSubject = new TransitionSubject();
@@ -111,32 +112,13 @@ public class ModelMediator {
 
 	/****************************************/
 
-	public void addMemento(ObjectStatusMemento memento) {
-		this.mementoCaretaker.addMemento(memento);
+	public void doCommand() {
+		if (command != null) {
+			command.execute();
+		}
 	}
-
-
-	public boolean canUndo() {
-        return this.mementoCaretaker.canUndo();
-    }
-	/**
-     * 回傳上一步的Memento, 不存在時會回傳最初的 (list[0])
-     * @return 上一步的Memento
-     */
-	public ObjectStatusMemento undo() {
-		return this.mementoCaretaker.undo();
-	}
-
-
-	public boolean canRedo() {
-        return this.mementoCaretaker.canRedo();
-    }
-	/**
-     * 回傳下一步的Memento, 不存在時會回傳現在的 (list[size()-1])
-     * @return 下一步的Memento
-     */
-    public ObjectStatusMemento redo() {
-		return this.mementoCaretaker.redo();
+	public void setCommand(Command command) {
+		this.command = command;
 	}
 
 	/****************************************/

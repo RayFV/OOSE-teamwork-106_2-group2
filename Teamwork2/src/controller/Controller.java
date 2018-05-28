@@ -4,6 +4,9 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import command.AddMementoCmd;
+import command.RedoCmd;
+import command.UndoCmd;
 import mediator.ModelMediator;
 import statediagram.Component;
 import statediagram.Note;
@@ -61,7 +64,8 @@ public class Controller {
 	//****************Memento****************//
 
     public void saveAction() {
-        mMdtr.addMemento(mMdtr.saveStateDiagram());
+        mMdtr.setCommand(new AddMementoCmd());
+        mMdtr.doCommand();
         System.out.println("saveAction()");
     }
 
@@ -69,19 +73,21 @@ public class Controller {
         mMdtr.detachAllStateSubject();
         mMdtr.detachAllTransitionSubject();
     }
-    public void undoAction() {
-    	System.out.println("undoAction()");
+    private void restoreAction() {
         this.detachAllSubject();
-        mMdtr.restoreStateDiagram(mMdtr.undo());
+        mMdtr.doCommand();
         mMdtr.fixTransitionRelationship();
         vMdtr.repaintWithoutSave();
     }
+    public void undoAction() {
+    	System.out.println("undoAction()");
+        mMdtr.setCommand(new UndoCmd());
+        restoreAction();
+    }
     public void redoAction() {
         System.out.println("redoAction()");
-        this.detachAllSubject();
-        mMdtr.restoreStateDiagram(mMdtr.redo());
-        mMdtr.fixTransitionRelationship();
-        vMdtr.repaintWithoutSave();
+        mMdtr.setCommand(new RedoCmd());
+        restoreAction();
     }
 
 
