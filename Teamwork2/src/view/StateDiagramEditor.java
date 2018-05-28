@@ -28,6 +28,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import abstractFactory.AbstractSkinFactory;
 import net.miginfocom.swing.MigLayout;
 import strategy.FlatUI;
 import strategy.GuiStrategy;
@@ -38,44 +39,68 @@ import java.awt.SystemColor;
 public class StateDiagramEditor extends JFrame{
 	
 	private View view = View.getInstance();
+	
+    private PanelButton panelButtonBuilder;
+    private BorderPanel borderPanelBuilder;
+    private SettingPanel settingPanelBuilder;
+    private StatusPanel statusPanelBuilder;
+    
+    private JPanel left;
+    private JPanel panelButton;
+    private JPanel borderPanel;
+    private JPanel settingPanel;
+    private JPanel statusPanel;
     
 	/**
 	 * Create the application.
 	 */
-	public StateDiagramEditor() {
-		initialize();
+	public StateDiagramEditor(AbstractSkinFactory skinFactory) {
+		initialize(skinFactory);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(AbstractSkinFactory skinFactory) {
 		setTitle("State Diagram Editor");
 		getContentPane().setBackground(SystemColor.controlShadow);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(800, 500));
 		
-		JPanel left = new JPanel(new BorderLayout(5, 5));
-		PanelButton panelButton = new PanelButton();
-		BorderPanel borderPanel = new BorderPanel("State Diagram");
+		left = skinFactory.createPanel();
+		left.setLayout(new BorderLayout(5, 2));
+
+		panelButton = skinFactory.createPanel();
+		panelButtonBuilder = new PanelButton(skinFactory, panelButton);
+		
+		borderPanel = skinFactory.createPanel();
+		borderPanelBuilder = new BorderPanel("State Diagram", borderPanel);
+		
 		DrawCanvas canvas = new DrawCanvas();
-		SettingPanel settingPanel = new SettingPanel();
-		StatusPanel statusPnael = new StatusPanel();
+		
+		settingPanel = skinFactory.createPanel();
+		settingPanelBuilder = new SettingPanel(skinFactory, settingPanel);
+		
+		statusPanel = skinFactory.createPanel();
+		statusPanelBuilder = new StatusPanel(skinFactory, statusPanel);
+		
 		borderPanel.add(canvas, BorderLayout.CENTER);
 		
 		canvas.setPreferredSize(new Dimension(800, 600));
-		borderPanel.add(statusPnael, BorderLayout.SOUTH);
+		borderPanel.add(statusPanel, BorderLayout.SOUTH);
 		getContentPane().add(borderPanel, BorderLayout.CENTER);
 		left.add(panelButton, BorderLayout.NORTH);
 		left.add(settingPanel, BorderLayout.CENTER);
 		getContentPane().add(left, BorderLayout.WEST);
 		
 		//Menu Bar
-		MenuBar menuBar = new MenuBar();
+		JMenuBar menuBar = skinFactory.createMenuBar();
+		MenuBar menuBarBuilder = new MenuBar(menuBar);
 		this.setJMenuBar(menuBar);
 
 		view.registerMainFrame(this);
 		view.buttonRefresh();
+		view.registerSettingPanel(settingPanelBuilder);
 		
 	}
 }

@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Color;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -14,14 +16,14 @@ import listeners.RedoListener;
 import listeners.MenuSaveListener;
 import listeners.UndoListener;
 
-public class MenuBar extends JMenuBar{
+public class MenuBar{
 	View vMdtr = View.getInstance();
 	
-	public MenuBar() {
-		setToolTipText("");
+	public MenuBar(JMenuBar menuBar) {
+		menuBar.setToolTipText("");
 		
 		JMenu file = new JMenu("File");
-		add(file);
+		menuBar.add(file);
 		
 		JMenuItem menuItemOpen = new JMenuItem("Open");
 		file.add(menuItemOpen);
@@ -35,7 +37,7 @@ public class MenuBar extends JMenuBar{
 		file.add(menuItemExit);
 		
 		JMenu menuEdit = new JMenu("Edit");
-		add(menuEdit);
+		menuBar.add(menuEdit);
 		
 		JMenuItem menuItemDelete = new JMenuItem("Delete");
 		menuEdit.add(menuItemDelete);
@@ -52,7 +54,7 @@ public class MenuBar extends JMenuBar{
 		menuEdit.add(menuItemRedo);
 		
 		JMenu style = new JMenu("Style");
-		add(style);
+		menuBar.add(style);
 		
 		JMenuItem flatui = new JMenuItem("Flat UI");
 		style.add(flatui);

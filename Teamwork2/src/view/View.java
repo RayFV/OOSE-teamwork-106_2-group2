@@ -9,6 +9,9 @@ import javax.swing.JComboBox;
 import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 
+import abstractFactory.AbstractSkinFactory;
+import abstractFactory.NormalSkinFactory;
+import abstractFactory.Skin;
 import controller.Controller;
 import document.DocumentOperation;
 import document.SDEDocument;
@@ -28,19 +31,9 @@ public class View {
 	private Controller controller;
 	private GuiStrategy guiStrategy;
 	private SDEDocument dc;
-	
-	private View() {
-		guiStrategy = new FlatUI();
-		dc = new DocumentOperation();
-	}
-	
-	public static View getInstance() {
-		return vMdtr;
-	}
-	
-	public void setController(Controller ctrl) {
-		this.controller = ctrl;
-	}
+
+	private StateDiagramEditor mainFrame;
+	private AbstractSkinFactory skinFactory;
 	
 	//Declare
 	private JButton buttonState;
@@ -50,7 +43,6 @@ public class View {
 	private JButton buttonDelete;
 	private JButton buttonEdit;
 
-	private StateDiagramEditor mainFrame;
 	private DrawCanvas drawCanvas;
 	private MouseState currentState = ChosenSelect.getInstance(); //singleton
 	private StatusPanel statusPanel;
@@ -77,6 +69,28 @@ public class View {
 	private JComboBox settingCbGroup;
 	private boolean pressedOK;
 	
+
+	private View() {
+		guiStrategy = new FlatUI();
+		dc = new DocumentOperation();
+	}
+	
+	public static View getInstance() {
+		return vMdtr;
+	}
+	
+	public void init() {
+		mainFrame = new StateDiagramEditor(skinFactory);
+		mainFrame.pack();
+		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setVisible(true);
+	}
+
+
+	public void setController(Controller controller) {
+		// TODO Auto-generated method stub
+		this.controller = controller;
+	}
 	
 	//**************Register****************//
 	public void registerButtonState(JButton bState) {
@@ -422,13 +436,6 @@ public class View {
 		return controller.getColorStringList();
 	}
 
-	public void initSettingComboBox() {
-		// TODO Auto-generated method stub
-		refreshColorComboBoxItem(settingCbGroupColor, getColorStringList());
-		refreshColorComboBoxItem(settingCbStateColor, getColorStringList());
-		refreshColorComboBoxItem(settingCbTransColor, getColorStringList());
-		refreshGroupComboBoxItem(settingCbGroup, getGroupList());
-	}
 
 	public void changeStateSize(int size) {
 		// TODO Auto-generated method stub
@@ -516,8 +523,13 @@ public class View {
 		this.buttonState.setForeground(guiStrategy.changeButtonFont());
 		this.buttonTransition.setForeground(guiStrategy.changeButtonFont());
 		
-		this.settingPanel.setBackground(guiStrategy.changePanel());
+		//this.settingPanel.setBackground(guiStrategy.changePanel());
 		
+	}
+
+	public void setSkinFactory(AbstractSkinFactory skinFactory) {
+		// TODO Auto-generated method stub
+		this.skinFactory = skinFactory;
 	}
 
 

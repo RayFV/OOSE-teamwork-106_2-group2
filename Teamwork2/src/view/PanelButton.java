@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import abstractFactory.AbstractSkinFactory;
 import listeners.DeleteListener;
 import listeners.EditListener;
 import listeners.BtnAddNoteListener;
@@ -19,8 +20,8 @@ import listeners.BtnSelectListener;
 import listeners.BtnStateListener;
 import listeners.BtnTransListener;
 
-@SuppressWarnings("serial")
-public class PanelButton extends JPanel{
+public class PanelButton{
+	
 	private JButton btnState;
 	private JButton btnTransition;
 	private JButton btnSelect;
@@ -29,22 +30,23 @@ public class PanelButton extends JPanel{
 	private JButton btnEdit;
 	private View view = View.getInstance();
 	
-	public PanelButton(){
-		this.setLayout(new GridLayout(0, 1, 5, 5));
+	public PanelButton(AbstractSkinFactory skinFactory, JPanel panel){
 		
-		btnState = new JButton("State");
-		btnTransition = new JButton("Transition");
-		btnSelect = new JButton("Select");
-		btnAddNote = new JButton("Add Note");
-		btnDelete = new JButton("Delete");
-		btnEdit = new JButton("Edit");
+		panel.setLayout(new GridLayout(0, 1, 1, 3));
 		
-		this.add(btnState);
-		this.add(btnTransition);
-		this.add(btnSelect);
-		this.add(btnAddNote);
-		this.add(btnDelete);
-		this.add(btnEdit);
+		btnState = skinFactory.createButton("State");
+		btnTransition = skinFactory.createButton("Transition");
+		btnSelect = skinFactory.createButton("Select");
+		btnAddNote = skinFactory.createButton("Add Note");
+		btnDelete = skinFactory.createButton("Delete");
+		btnEdit = skinFactory.createButton("Edit");
+		
+		panel.add(btnState);
+		panel.add(btnTransition);
+		panel.add(btnSelect);
+		panel.add(btnAddNote);
+		panel.add(btnDelete);
+		panel.add(btnEdit);
 		
 		btnState.addActionListener(new BtnStateListener());
 		btnTransition.addActionListener(new BtnTransListener());
