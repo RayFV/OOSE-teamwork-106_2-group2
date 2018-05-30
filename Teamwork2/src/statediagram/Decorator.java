@@ -9,6 +9,7 @@ public abstract class Decorator extends Component{
 	Component component;
 	
 	public Decorator(Component component) {
+		super();
 		this.component = component;
 	}
 	
@@ -22,6 +23,24 @@ public abstract class Decorator extends Component{
 
 	public Component getComponent() {
 		return this.component;
+	}
+	@Override
+	/**
+	 * 將符合id的Component回傳
+	 * @param id =要尋找的component的id
+	 */
+	public Component getComponent(int id) {
+		if (component.getId() == id) {
+			return component;
+		}
+		else {
+			Component cc = component.getComponent(id);
+			if (cc != null) {
+				return cc;
+			}
+		}
+
+		return null;
 	}
 
 	@Override

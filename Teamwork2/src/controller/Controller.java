@@ -164,9 +164,9 @@ public class Controller {
 		System.out.println(id);
 		Component comp = this.getComponent(id);
 		Component decorator = new Note("", comp.getPoint(), comp);
-		Component group1 = mMdtr.getGroup(1);
+        Component group1 = mMdtr.getGroup(1);
         group1.add(decorator);
-        //mMdtr.removeComponent(id);
+        mMdtr.removeComponent(id);
         System.out.println(decorator.getId());
 		return decorator.getId();
 	}
