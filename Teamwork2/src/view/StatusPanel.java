@@ -7,33 +7,45 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class StatusPanel extends JPanel{
-	private JLabel posText = new JLabel("Position: ");
-	private JLabel coordX = new JLabel("0", JLabel.RIGHT);
-	private JLabel coordY = new JLabel("0", JLabel.RIGHT);
-	private JLabel wall = new JLabel("   ||   "); //區隔用
-	private JLabel itemText = new JLabel("Selected Item: ");
-	private JLabel selectedItem = new JLabel("None", JLabel.LEFT);
-	private JLabel wall2 = new JLabel("   ||   "); //區隔用
-	private JLabel stateText = new JLabel("Mouse State: ");
-	private JLabel selectedState = new JLabel("Select", JLabel.LEFT);
+import abstractFactory.AbstractSkinFactory;
+
+public class StatusPanel{
+	private JLabel posText;
+	private JLabel coordX;
+	private JLabel coordY ;
+	private JLabel wall ; //區隔用
+	private JLabel itemText;
+	private JLabel selectedItem ;
+	private JLabel wall2; //區隔用
+	private JLabel stateText;
+	private JLabel selectedState;
 	
 	private View mdtr = View.getInstance();
 
-	public StatusPanel() {
-		this.setLayout(new FlowLayout());
-		this.add(posText);
-		this.add(coordX);
-		this.add(coordY);
-		this.add(wall);
-		this.add(itemText);
+	public StatusPanel(AbstractSkinFactory skinFactory, JPanel panel) {
+		
+		posText = skinFactory.createLabel("Position: ");
+		coordX = skinFactory.createLabel("0", JLabel.RIGHT);
+		coordY = skinFactory.createLabel("0", JLabel.RIGHT);
+		wall = skinFactory.createLabel("   ||   "); //區隔用
+		itemText = skinFactory.createLabel("Selected Item: ");
+		selectedItem = skinFactory.createLabel("None", JLabel.LEFT);
+		wall2 = skinFactory.createLabel("   ||   "); //區隔用
+		stateText = skinFactory.createLabel("Mouse State: ");
+		selectedState = skinFactory.createLabel("Select", JLabel.LEFT);
+		
+		panel.setLayout(new FlowLayout());
+		panel.add(posText);
+		panel.add(coordX);
+		panel.add(coordY);
+		panel.add(wall);
+		panel.add(itemText);
 		selectedItem.setForeground(Color.red);
-		this.add(selectedItem);
-		this.add(wall2);
-		this.add(stateText);
+		panel.add(selectedItem);
+		panel.add(wall2);
+		panel.add(stateText);
 		selectedState.setForeground(Color.red);
-		this.add(selectedState);
-		this.setBackground(Color.LIGHT_GRAY);
+		panel.add(selectedState);
 		mdtr.registerStatusPanel(this);
 	}
 	

@@ -2,10 +2,14 @@
 
 import javax.swing.SwingUtilities;
 
+import abstractFactory.CoolSkinFactory;
+import abstractFactory.NormalSkinFactory;
+import abstractFactory.Skin;
 import controller.Controller;
 import statediagram.Decorator;
 import statediagram.Note;
 import view.StateDiagramEditor;
+import view.View;
 
 public class Application {
 	public static void main(String[] args) {
@@ -22,13 +26,20 @@ public class Application {
 	}
 	
 	public static void runApp(){
-        StateDiagramEditor stateDiagramEditor = new StateDiagramEditor();
-        stateDiagramEditor.pack();
-        stateDiagramEditor.setLocationRelativeTo(null);
-        Controller ctrl = new Controller();
-        ctrl.settingColor();
-        //view.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        stateDiagramEditor.setVisible(true);
+        System.out.println("Running App...");
+		View view = View.getInstance();
+		Controller controller = new Controller();
+
+		//Get skin from Skin.txt
+		String skin = Skin.getInstance().getSkin();
+		if(skin.toLowerCase().equals("normal")) {
+			view.setSkinFactory(new NormalSkinFactory());
+		}else if(skin.toLowerCase().equals("cool")) {
+			view.setSkinFactory(new CoolSkinFactory());
+		}
+		
+		view.init();
+		//view.initSettingComboBox();
         
     }
 }

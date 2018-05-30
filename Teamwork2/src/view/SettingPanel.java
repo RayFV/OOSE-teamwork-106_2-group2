@@ -22,69 +22,90 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
+
+import abstractFactory.AbstractSkinFactory;
+
 import javax.swing.text.AbstractDocument;
 
 import listeners.ChangeGroupColorListener;
 
-public class SettingPanel extends JPanel{
+public class SettingPanel{
 
-	JLabel lblGroup = new JLabel("Group:");
-	JLabel lblGroupColor = new JLabel("Color");
-	JLabel lblStateColor = new JLabel("Color");
-	JLabel lblStateSize = new JLabel("Size");
-	JLabel lblTransitionColor = new JLabel("Color");
+	JLabel lblGroup;
+	JLabel lblGroupColor;
+	JLabel lblStateColor;
+	JLabel lblStateSize;
+	JLabel lblTransitionColor;
 
 	JTextField textFieldStateSize = new JTextField("0");
 	
-	JPanel panelGroup = new JPanel();
-	JPanel panelTransition = new JPanel();
-	JPanel panelState = new JPanel();
+	JPanel panelGroup;
+	JPanel panelTransition;
+	JPanel panelState ;
 	
-	JButton addGroup = new JButton("Add Group");
-	
-	JComboBox comboComponentGroup = new JComboBox();
-	JComboBox comboGroupColor = new JComboBox();
-	JComboBox comboStateColor = new JComboBox();
-	JComboBox comboTransitionColor = new JComboBox();
+	JButton addGroupButton;
 	
 	View vMdtr = View.getInstance();
 	
+	ArrayList<String> colors = vMdtr.getColorStringList();
+	ArrayList<Integer> group = vMdtr.getGroupList();
+	
+	JComboBox comboComponentGroup = new JComboBox(group.toArray());
+	JComboBox comboGroupColor = new JComboBox(colors.toArray());
+	JComboBox comboStateColor = new JComboBox(colors.toArray());
+	JComboBox comboTransitionColor = new JComboBox(colors.toArray());
+	
+	
 	JLabel mouseXY = new JLabel("");
-	JPanel panel_1 = new JPanel();
 
 	private GridBagLayout gbl = new GridBagLayout();
 	
-	public SettingPanel() {
-		this.setLayout(gbl);
+	private JPanel panel;
+	
+	public SettingPanel(AbstractSkinFactory skinFactory, JPanel panel) {
+		this.panel = panel;
+		panel.setLayout(gbl);
+		
+		panelGroup = skinFactory.createPanel();
+		panelTransition = skinFactory.createPanel();
+		panelState = skinFactory.createPanel();
+		
+		lblGroup = skinFactory.createLabel("Group:");
+		lblGroupColor = skinFactory.createLabel("Color");
+		lblStateColor= skinFactory.createLabel("Color");
+		lblStateSize = skinFactory.createLabel("Size");
+		lblTransitionColor = skinFactory.createLabel("Color");
+		
+		addGroupButton = skinFactory.createButton("Add Group");
 		
 		Border bdr = BorderFactory.createEtchedBorder(Color.black,Color.black);
-		Border titlebdr = BorderFactory.createTitledBorder(bdr, "Setting");
-		this.setBorder(titlebdr);
+		Border titlebdr = BorderFactory.createTitledBorder(bdr, "Setting", 0, 0, null, Color.BLACK);
+		panel.setBorder(titlebdr);
 
 		panelGroup.setLayout(new GridLayout(3,1));
 		panelState.setLayout(new GridLayout(2,1));
 		panelTransition.setLayout(new GridLayout(1,1));
 		
-		panelGroup.setBorder(new TitledBorder(null, "Group", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelGroup.setBorder(new TitledBorder(null, "Group", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panelGroup.add(lblGroup);
 		panelGroup.add(comboComponentGroup);
-		comboComponentGroup.setSelectedIndex(-1);
+		//comboComponentGroup.setSelectedIndex(-1);
 		panelGroup.add(lblGroupColor);
 		panelGroup.add(comboGroupColor);
-		comboGroupColor.setSelectedIndex(-1);
-		panelGroup.add(addGroup);
-		this.add(panelGroup);
+		//comboGroupColor.setSelectedIndex(-1);
+		panelGroup.add(addGroupButton);
+		panel.add(panelGroup);
 		
 		comboGroupColor.addActionListener (new ChangeGroupColorListener());
 		
-		addGroup.addActionListener (new ActionListener () {
+		addGroupButton.addActionListener (new ActionListener () {
 		    public void actionPerformed(ActionEvent e) {
 		        vMdtr.addNewGroup();
 		    }
 		});
 		
 		
-		panelState.setBorder(new TitledBorder(null, "State", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelState.setBorder(new TitledBorder(null, "State", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panelState.add(lblStateColor);
 		panelState.add(comboStateColor);
 		panelState.add(lblStateSize);
@@ -95,7 +116,7 @@ public class SettingPanel extends JPanel{
 	    DocumentFilter filterOne = new IntegerRangeDocumentFilter();
 	    ((AbstractDocument) textDocOne).setDocumentFilter(filterOne);
 		
-		this.add(panelState);
+	    panel.add(panelState);
 		comboStateColor.addActionListener (new ActionListener () {
 		    public void actionPerformed(ActionEvent e) {
 		        vMdtr.setStateSubject(getStateSelectedColorText());
@@ -126,10 +147,10 @@ public class SettingPanel extends JPanel{
 			  }
 		});
 		
-		panelTransition.setBorder(new TitledBorder(null, "Transition", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelTransition.setBorder(new TitledBorder(null, "Transition", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panelTransition.add(lblTransitionColor);
 		panelTransition.add(comboTransitionColor);
-		this.add(panelTransition);
+		panel.add(panelTransition);
 		comboTransitionColor.addActionListener (new ActionListener () {
 		    public void actionPerformed(ActionEvent e) {
 		        vMdtr.setTransitionSubject(getTransSelectedColorText());
@@ -143,9 +164,9 @@ public class SettingPanel extends JPanel{
 		easyConstraints(c, gbl, panelState, 1, 1, 0, 1, 0.5, 1.0);
 		easyConstraints(c, gbl, panelTransition, 1, 1, 0, 2, 0.5, 1.0);
 		c.weighty = 1.0;
-		this.add(Box.createVerticalGlue(), c);
+		panel.add(Box.createVerticalGlue(), c);
 		
-		vMdtr.registerSettingPanel(this);
+		
 		vMdtr.registerComboStateColor(comboStateColor);
 		vMdtr.registerComboTransColor(comboTransitionColor);
 		vMdtr.registerComboGroupColor(comboGroupColor);
@@ -153,7 +174,7 @@ public class SettingPanel extends JPanel{
 	}
 	
 	private void easyConstraints(GridBagConstraints c, GridBagLayout gbl, JComponent comp, int w, int h, int x, int y, double wx, double wy) {
-				c.anchor = GridBagConstraints.FIRST_LINE_START;
+		c.anchor = GridBagConstraints.FIRST_LINE_START;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets.top = 3;
 		c.insets.bottom = 0;
@@ -163,7 +184,7 @@ public class SettingPanel extends JPanel{
 		c.gridy = y;
 		c.weightx = 0;
 		c.weighty = 0;
-		this.add(comp, c);
+		panel.add(comp, c);
 	}
 	
 	

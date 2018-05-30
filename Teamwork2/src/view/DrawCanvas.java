@@ -24,7 +24,7 @@ public class DrawCanvas extends JPanel{
 	private float radius = 10;
 	
 	public DrawCanvas() {
-		this.setBackground(Color.white);
+		this.setBackground(new Color(223, 230, 233));
 		vMdtr.registerDrawCanvas(this);
 
 		this.addMouseMotionListener(new MousePositionsListener());

@@ -20,8 +20,8 @@ public class Controller {
 	ModelMediator mMdtr = ModelMediator.getInstance();
 	
 	public Controller() {
-		vMdtr.setController(this);
 		mMdtr.setController(this);
+		vMdtr.setController(this);
 	}
 	
 	//*********************Diagram*********************//
@@ -201,11 +201,6 @@ public class Controller {
         Component group = mMdtr.getGroup(groupNumber);
         group.changeColor(color);
     }
-
-	public void settingColor() {
-		// TODO Auto-generated method stub
-		vMdtr.initSettingComboBox();
-	}
 
 	public void changeStateSize(int size) {
 		// TODO Auto-generated method stub

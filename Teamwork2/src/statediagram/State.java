@@ -13,7 +13,7 @@ import java.io.Serializable;
 import memento.ObjectStatusMemento;
 import memento.StateStatusMemento;;
 
-public class State extends Component implements Serializable{
+public class State extends Component implements Serializable, Circle{
 	private Rectangle b;
 	private float line;
 	
