@@ -11,9 +11,7 @@ import listeners.ChangeFlatUIStyleListener;
 import listeners.DeleteListener;
 import listeners.EditListener;
 import listeners.MenuExitListener;
-import listeners.MenuOpenListener;
 import listeners.RedoListener;
-import listeners.MenuSaveListener;
 import listeners.UndoListener;
 
 public class MenuBar{
@@ -70,8 +68,8 @@ public class MenuBar{
 		vMdtr.registerMenuUndo(menuItemUndo);
 		vMdtr.registerMenuRedo(menuItemRedo);
 		
-		menuItemOpen.addActionListener(new MenuOpenListener());
-		menuItemSave.addActionListener(new MenuSaveListener());
+		//menuItemOpen.addActionListener(new MenuOpenListener());
+		//menuItemSave.addActionListener(new MenuSaveListener());
 		menuItemExit.addActionListener(new MenuExitListener());
 		menuItemDelete.addActionListener(new DeleteListener());
 		menuItemModify.addActionListener(new EditListener());

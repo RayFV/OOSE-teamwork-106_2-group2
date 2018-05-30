@@ -13,8 +13,6 @@ import abstractFactory.AbstractSkinFactory;
 import abstractFactory.NormalSkinFactory;
 import abstractFactory.Skin;
 import controller.Controller;
-import document.DocumentOperation;
-import document.SDEDocument;
 import state.ChosenSelect;
 import state.ChosenState;
 import state.ChosenTransition;
@@ -31,7 +29,6 @@ public class View {
 	private static View vMdtr = new View();
 	private Controller controller;
 	private GuiStrategy guiStrategy;
-	private SDEDocument dc;
 
 	private StateDiagramEditor mainFrame;
 	private AbstractSkinFactory skinFactory;
@@ -73,7 +70,6 @@ public class View {
 
 	private View() {
 		guiStrategy = new FlatUI();
-		dc = new DocumentOperation();
 	}
 	
 	public static View getInstance() {
@@ -262,18 +258,6 @@ public class View {
 		this.removeComponent();
 	}
 	
-	public void openFileBtnClicked() {
-		//delegate SDEDocument to open document
-		dc.openDocument(getStateDiagram(), this.drawCanvas);
-		repaint();
-
-	}
-
-	public void saveFileBtnClicked() {
-		//delegate SDEDocument to save document
-		dc.saveDocument(getStateDiagram());
-
-	}
 	
 	/*********/
 	

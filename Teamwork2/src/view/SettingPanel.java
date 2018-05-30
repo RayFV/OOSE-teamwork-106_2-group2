@@ -20,8 +20,6 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.Document;
-import javax.swing.text.DocumentFilter;
 
 import abstractFactory.AbstractSkinFactory;
 
@@ -112,9 +110,6 @@ public class SettingPanel{
 		panelState.add(textFieldStateSize);
 		textFieldStateSize.setColumns(10);
 		
-		Document textDocOne = textFieldStateSize.getDocument();
-	    DocumentFilter filterOne = new IntegerRangeDocumentFilter();
-	    ((AbstractDocument) textDocOne).setDocumentFilter(filterOne);
 		
 	    panel.add(panelState);
 		comboStateColor.addActionListener (new ActionListener () {
