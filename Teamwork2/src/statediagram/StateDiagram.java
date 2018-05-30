@@ -1,7 +1,10 @@
 package statediagram;
 
+import memento.NoteStatusMemento;
 import memento.ObjectStatusMemento;
 import memento.StateDiagramStatusMemento;
+import memento.StateStatusMemento;
+import memento.TransitionStatusMemento;
 import view.View;
 
 import java.util.ArrayList;
@@ -71,13 +74,17 @@ public class StateDiagram extends Component {
 		this.componentList = new ArrayList<Component>();
 		for (ObjectStatusMemento m: previousMemento.getComponentList()) {
 			Component re;
-			if (m.getClassName().equals("State")) {
+			if (m instanceof StateStatusMemento) {
 				System.out.println("restore State");
 				re = new State();
 			}
-			else if (m.getClassName().equals("Transition")) {
+			else if (m instanceof TransitionStatusMemento) {
 				System.out.println("restore Transition");
 				re = new Transition();
+			}
+			else if (m instanceof NoteStatusMemento) {
+				System.out.println("restore Note");
+				re = new Note();
 			}
 			else {
 				re = new StateDiagram();
