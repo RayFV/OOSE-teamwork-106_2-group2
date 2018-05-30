@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 
 import memento.MementoCaretaker;
 import statediagram.Component;
+import statediagram.Decorator;
 import statediagram.StateDiagram;
 import view.View;
 
@@ -37,29 +38,36 @@ public class ChosenTransition implements MouseState{
 		if (PointCheck) {
 			vMdtr.addTranstion(e, s1, s2);
 			PointCheck = false;
+			s1 = null;
+			s2 = null;
 
 			vMdtr.changeState(ChosenSelect.getInstance());
 		}
 	}
-	private void clickedLoopCheck(View vMdtr, Component sd, MouseEvent e) {
-		for(Component de : sd.getComponentList()) {
-			if (de instanceof StateDiagram) {
-				this.clickedLoopCheck(vMdtr, de, e);
-			}
-			else {
-				if (de.checkPoint(e.getPoint())) {		
-				
-					if(s1 == null) {
-						s1 = de;
-						System.out.println("Clicked state 1: " + s1.getClassName());
-					}
-					else if(s1.getPoint() != de.getPoint()) {
-						s2 = de;
-						System.out.println("Clicked state 2: " + s2.getClassName());
-						PointCheck = true;
-					}
+	private void clickedCheck(View vMdtr, Component de, MouseEvent e) {
+		if (de instanceof StateDiagram) {
+			this.clickedLoopCheck(vMdtr, de, e);
+		}
+		else if (de instanceof Decorator) {
+			this.clickedCheck(vMdtr, ((Decorator) de).getComponent(), e);
+		}
+		else {
+			if (de.checkPoint(e.getPoint())) {
+				if(s1 == null) {
+					s1 = de;
+					System.out.println("Clicked state 1: " + s1.getClassName());
+				}
+				else if(s1.getPoint() != de.getPoint()) {
+					s2 = de;
+					System.out.println("Clicked state 2: " + s2.getClassName());
+					PointCheck = true;
 				}
 			}
+		}
+	}
+	private void clickedLoopCheck(View vMdtr, Component sd, MouseEvent e) {
+		for(Component de : sd.getComponentList()) {
+			this.clickedCheck(vMdtr, de, e);
 		}
 	}
 

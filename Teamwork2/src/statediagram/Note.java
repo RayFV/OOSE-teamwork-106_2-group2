@@ -9,18 +9,19 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.geom.Line2D;
 
+import memento.NoteStatusMemento;
+import memento.ObjectStatusMemento;
+
 public class Note extends Decorator{
 	private Rectangle b;
 	private float line;
 	private int width;
 	private int height;
 	private Line2D line2D;
-	/*
+
 	public Note() {
-		setBoundary();
-		this.attachSubject();
-	}String text, Point p
-	*/
+		super(null);
+	}
 	
 	public Note(String text, Point p, Component comp) {
 		super(comp);
@@ -40,7 +41,6 @@ public class Note extends Decorator{
 	}
 	
 	private void drawNote(Graphics g) {
-		// TODO Auto-generated method stub
 		setBoundary();
 		
 		g.setColor(getColor());
@@ -137,4 +137,22 @@ public class Note extends Decorator{
 		this.setY((int)p.getY());
 	}
 
+
+	@Override
+	public ObjectStatusMemento save() {
+		return new NoteStatusMemento(this.getClassName(), this.getId(), this.getGroup(), this.getColor(),
+			this.getSize(), this.getText(), this.getX(), this.getY(), this.getPoint(),
+			this.getComponent(), b, line, width, height, line2D
+		);
+	}
+
+	@Override
+	public void restore(ObjectStatusMemento previousMemento) {
+		super.restore(previousMemento);
+		this.b = ((NoteStatusMemento) previousMemento).getB();
+		this.line = ((NoteStatusMemento) previousMemento).getLine();
+		this.width = ((NoteStatusMemento) previousMemento).getWidth();
+		this.height = ((NoteStatusMemento) previousMemento).getHeight();
+		this.line2D = ((NoteStatusMemento) previousMemento).getLine2D();
+	}
 }
