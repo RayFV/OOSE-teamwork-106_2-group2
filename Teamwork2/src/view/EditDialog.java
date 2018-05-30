@@ -6,6 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import abstractFactory.AbstractSkinFactory;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Panel;
@@ -23,7 +26,7 @@ import javax.swing.DefaultComboBoxModel;
 
 public class EditDialog extends JDialog implements ActionListener{
 
-	private JPanel contentPanel = new JPanel();
+	private JPanel contentPanel;
 	private JTextField textFieldName;
 	private JLabel lblDescription;
 	private JLabel lblName;
@@ -40,8 +43,10 @@ public class EditDialog extends JDialog implements ActionListener{
 	/**
 	 * Create the dialog.
 	 */
-	public EditDialog() {
+	public EditDialog(AbstractSkinFactory skinFactory) {
+		contentPanel = skinFactory.createPanel();
 		vMdtr.registerEditStateDialog(this);
+		
 		setResizable(false);
 		setModal(true);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -52,11 +57,11 @@ public class EditDialog extends JDialog implements ActionListener{
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		lblDescription = new JLabel("Please define the status.");
+		lblDescription = skinFactory.createLabel("Please define the status.");
 		lblDescription.setBounds(10, 10, 234, 15);
 		contentPanel.add(lblDescription);
 		
-		lblName = new JLabel("Name:");
+		lblName = skinFactory.createLabel("Name:");
 		lblName.setBounds(10, 47, 101, 15);
 		contentPanel.add(lblName);
 		
@@ -66,7 +71,7 @@ public class EditDialog extends JDialog implements ActionListener{
 		textFieldName.setColumns(10);
 		vMdtr.registerEditStateDialogTextFieldName(textFieldName);
 		
-		lblGroup = new JLabel("Group:");
+		lblGroup = skinFactory.createLabel("Group:");
 		lblGroup.setBounds(10, 111, 46, 15);
 		contentPanel.add(lblGroup);
 		
@@ -75,7 +80,7 @@ public class EditDialog extends JDialog implements ActionListener{
 		contentPanel.add(cbGroup);
 		vMdtr.registerEditStateDialogComboGroup(cbGroup);
 		
-		lblColor = new JLabel("Color:");
+		lblColor = skinFactory.createLabel("Color:");
 		lblColor.setBounds(10, 80, 147, 15);
 		contentPanel.add(lblColor);
 		
@@ -84,18 +89,18 @@ public class EditDialog extends JDialog implements ActionListener{
 		contentPanel.add(cbColor);
 		vMdtr.registerEditStateDialogComboColor(cbColor);
 		
-		buttonPane = new JPanel();
+		buttonPane = skinFactory.createPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 	
-		okButton = new JButton("OK");
+		okButton = skinFactory.createButton("OK");
 		okButton.setActionCommand("OK");
 		okButton.addActionListener(this);
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
 	
 	
-		cancelButton = new JButton("Cancel");
+		cancelButton = skinFactory.createButton("Cancel");
 		cancelButton.setActionCommand("Cancel");
 		cancelButton.addActionListener(this);
 		buttonPane.add(cancelButton);

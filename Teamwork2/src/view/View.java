@@ -393,7 +393,7 @@ public class View {
 	//show up the edit dialog
 	public void showDialog() {
 		if(eDialog == null) {
-			eDialog = new EditDialog();
+			eDialog = new EditDialog(skinFactory);
 			this.refreshColorComboBoxItem(eDialogCbColor, getColorStringList());
 		}
 		this.eDialogTextFieldName.setText(getSelectedItemText());
