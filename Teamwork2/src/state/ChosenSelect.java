@@ -41,25 +41,24 @@ public class ChosenSelect implements MouseState{
 		}
 	}
 	private void pressedCheck(View vMdtr, Component de, MouseEvent e) {
-		if(de.checkPoint(e.getPoint()) || de.checkLinePoint(e.getPoint())) {
+		if (de instanceof StateDiagram) {
+			this.pressedLoopCheck(vMdtr, de, e);
+		}
+		else if(de.checkPoint(e.getPoint()) || de.checkLinePoint(e.getPoint())) {
 			if(deCheck == null) {
 				deCheck = de;
 				System.out.println("Pressed item: " + deCheck.getClassName() + deCheck.getId());
 			}
 			vMdtr.setSelectedItemID(de.getId());
 		}
+
+		if (de instanceof Decorator) {
+			this.pressedCheck(vMdtr, ((Decorator) de).getComponent(), e);
+		}
 	}
 	private void pressedLoopCheck(View vMdtr, Component sd, MouseEvent e) {
 		for(Component de : sd.getComponentList()) {
-			if (de instanceof StateDiagram) {
-				this.pressedLoopCheck(vMdtr, de, e);
-			}
-			else {
-				this.pressedCheck(vMdtr, de, e);
-				if (de instanceof Decorator) {
-					this.pressedCheck(vMdtr, ((Decorator) de).getComponent(), e);
-				}
-			}
+			this.pressedCheck(vMdtr, de, e);
 		}
 	}
 
@@ -77,7 +76,10 @@ public class ChosenSelect implements MouseState{
 		this.draggedLoopCheck(vMdtr, sd, e);
 	}
 	private void draggedCheck(View vMdtr, Component de, MouseEvent e) {
-		if(!check) {
+		if (de instanceof StateDiagram) {
+			this.draggedLoopCheck(vMdtr, de, e);
+		}
+		else if(!check) {
 			if(de.checkPoint(e.getPoint())){
 				check = true;
 			}
@@ -85,18 +87,14 @@ public class ChosenSelect implements MouseState{
 		if(deCheck == de) {
 			vMdtr.changePoint(e, deCheck);
 		}
+
+		if (de instanceof Decorator) {
+			this.draggedCheck(vMdtr, ((Decorator) de).getComponent(), e);
+		}
 	}
 	private void draggedLoopCheck(View vMdtr, Component sd, MouseEvent e) {
 		for(Component de : sd.getComponentList()) {
-			if (de instanceof StateDiagram) {
-				this.draggedLoopCheck(vMdtr, de, e);
-			}
-			else {
-				this.draggedCheck(vMdtr, de, e);
-				if (de instanceof Decorator) {
-					this.draggedCheck(vMdtr, ((Decorator) de).getComponent(), e);
-				}
-			}
+			this.draggedCheck(vMdtr, de, e);
 		}
 	}
 
