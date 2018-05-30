@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+//read Skin.txt file
+
 public class Skin {
 	private static final String FILENAME = "Skin.txt";
 	private static Skin instance = new Skin();

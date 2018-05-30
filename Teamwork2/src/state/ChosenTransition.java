@@ -94,5 +94,33 @@ public class ChosenTransition implements MouseState{
 		// TODO Auto-generated method stub
 		return text;
 	}
-	
+
+	@Override
+	public void mouseMove(View vMdtr, MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stateButtonClicked(View vMdtr) {
+		// TODO Auto-generated method stub
+
+		vMdtr.changeState(ChosenState.getInstance());
+	}
+
+	@Override
+	public void transButtonClicked(View vMdtr) {
+		// TODO Auto-generated method stub
+
+		PointCheck = false;
+		s1 = null;
+		s2 = null;
+	}
+
+	@Override
+	public void selectButtonClicked(View vMdtr) {
+		// TODO Auto-generated method stub
+
+		vMdtr.changeState(ChosenSelect.getInstance());
+	}
 }

@@ -19,6 +19,7 @@ import state.ChosenSelect;
 import state.ChosenState;
 import state.ChosenTransition;
 import state.MouseState;
+import statediagram.Circle;
 import statediagram.Component;
 import statediagram.StateDiagram;
 import strategy.FlatUI;
@@ -223,19 +224,19 @@ public class View {
 	/*  Action Event */
 	/*****************/
 	public void transClick(ActionEvent e) {
-		changeState(ChosenTransition.getInstance());
+		currentState.transButtonClicked(this);
 		this.setSelectedItemID(-1);
 		System.out.println("trans btn clicked");
 	}
 	
 	public void stateClick(ActionEvent e) {
-		changeState(ChosenState.getInstance());
+		currentState.stateButtonClicked(this);
 		this.setSelectedItemID(-1);
 		System.out.println("state btn clicked");
 	}
 	
 	public void selectClick(ActionEvent e) {
-		changeState(ChosenSelect.getInstance());
+		currentState.selectButtonClicked(this);
 		System.out.println("select btn clicked");
 	}
 	
@@ -291,6 +292,7 @@ public class View {
 	//update mouse position
 	public void setCoordinates(MouseEvent e) {
 		// TODO Auto-generated method stub
+		currentState.mouseMove(this, e);
 		statusPanel.setCoordinates(e.getX(), e.getY());
 	}
 	
@@ -386,7 +388,6 @@ public class View {
 		comp.changePoint(e.getPoint());
 		repaint();
 	}
-	
 	
 	//***************Edit Dialog***************//
 	//show up the edit dialog

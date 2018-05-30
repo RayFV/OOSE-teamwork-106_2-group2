@@ -15,5 +15,10 @@ public interface MouseState {
 	//public void mouseReleased(MouseEvent e, DrawDiagram d, AbstractFactory f, Caretaker c);
 	public void mouseDragged(View vMdtr, MouseEvent e);
 	public void mouseClicked(View vMdtr, MouseEvent e);
+	public void mouseMove(View vMdtr, MouseEvent e);
+	
+	public void stateButtonClicked(View vMdtr);
+	public void transButtonClicked(View vMdtr);
+	public void selectButtonClicked(View vMdtr);
 }
 
