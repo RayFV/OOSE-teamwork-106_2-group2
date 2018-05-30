@@ -38,6 +38,8 @@ public class ChosenTransition implements MouseState{
 		if (PointCheck) {
 			vMdtr.addTranstion(e, s1, s2);
 			PointCheck = false;
+			s1 = null;
+			s2 = null;
 
 			vMdtr.changeState(ChosenSelect.getInstance());
 		}
