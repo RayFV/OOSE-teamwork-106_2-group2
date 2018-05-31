@@ -2,6 +2,7 @@ package statediagram;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -18,6 +19,7 @@ public class Note extends Decorator{
 	private int width;
 	private int height;
 	private Line2D line2D;
+	
 
 	public Note() {
 		super(null);
@@ -43,16 +45,36 @@ public class Note extends Decorator{
 	private void drawNote(Graphics g) {
 		setBoundary();
 		
-		g.setColor(getColor());
+		g.setColor(new Color(255, 253, 227));
 		
 		((Graphics2D)g).setStroke(new BasicStroke(line));
 		((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,		//�ϥΨ������ﵽ��ܽ�q
                 RenderingHints.VALUE_ANTIALIAS_ON);
-		
+
+       // g.fillRect(getX(), getY(), width, height);
+        g.setColor(getColor());
 		g.drawRect(getX(), getY(), width, height);
 		
+		//Text
+		FontMetrics fm = g.getFontMetrics();
+		String texts = getText();
+		System.out.println(texts);
+		g.setColor(Color.black);
+		int x;
+		int y = (int)b.getY() + 2;
+		for(String line :texts.split(";")) {
+			System.out.println(line);
+			double textWidth = fm.getStringBounds(line, g).getWidth();
+			x = (int)((b.getX()+width/2-textWidth/2));
+			y += 10;
+			g.drawString(line, x, y);//�e��ron middle
+		}
+		
+		
+		//Line
 		Point p1 = this.getPoint();
 		Point p2 = super.component.getPoint();
+		String p2Name = super.component.getClassName();
 		
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setStroke(new BasicStroke(2));							//�u���ʲ�
@@ -61,29 +83,73 @@ public class Note extends Decorator{
   
         g2.setPaint(getColor());
         
-        double x;													//�N�����ন���צA�i��p��Ap1�Mp2�p��ۤϡA���̵u�Z��
-        double y = p1.y + 30 *  Math.sin(Math.toRadians(getangles()));		
-        double x2;
-        double y2 = p2.y - 30 *  Math.sin(Math.toRadians(getangles()));
+        double x1 = p1.x;													
+        double y1 = p1.y;			
+        double x2 = p2.x + Math.cos(Math.toRadians(getangles()));
+        double y2 = p2.y;
         
-        if(p1.x < p2.x) {
-        	x = p1.x + 30 *  Math.cos(Math.toRadians(getangles()));
-        	x2 = p2.x - 30 *  Math.cos(Math.toRadians(getangles()));
+        if(p1.x + this.width < p2.x ) {
+    		x1 = p1.x + this.width;
+    		x2 = p2.x;
+    		if(p2.y < p1.y) {
+        		y1 = p1.y;
+        		y2 = p2.y + this.height;
+        	}
+        	else if( p1.y <= p2.y && p2.y <= p1.y + this.height)
+        	{
+            	y1 = p1.y + this.height / 2;
+        		y2 = p2.y + this.height / 2;
+        	}else{
+        		y1 = p1.y + this.height;
+        		y2 = p2.y;
+        	}
+        	if(p2Name.equals("State")) {
+        		x2 = p2.x - 30 *  Math.cos(Math.toRadians(getangles()));
+        	}
+        }else if(p1.x + this.width >= p2.x && p2.x >= p1.x){
+        	x1 = p1.x + this.width / 2;
+        	x2 = p2.x + this.width / 2;
+        	if(p2.y < p1.y)
+        	{
+            	y1 = p1.y;
+            	y2 = p2.y + this.height;
+        	}
+        	else{
+        		y1 = p1.y + this.height;
+            	y2 = p2.y;
+        	}
+        	if(p2Name.equals("State")) {
+            	x2 = p2.x + Math.cos(Math.toRadians(getangles()));
+        	}
         }
-        else {
-        	x = p1.x - 30 *  Math.cos(Math.toRadians(getangles()));
-        	x2 = p2.x + 30 *  Math.cos(Math.toRadians(getangles()));
+        else if(p2.x < p1.x){
+        	x1 = p1.x;
+        	x2 = p2.x + this.width;
+        	if(p2.y < p1.y) {
+        		y1 = p1.y;
+        		y2 = p2.y + this.height;
+        	}
+        	else if( p1.y <= p2.y && p2.y <= p1.y + this.height)
+        	{
+            	y1 = p1.y + this.height / 2;
+        		y2 = p2.y + this.height / 2;
+        	}else{
+        		y1 = p1.y + this.height;
+        		y2 = p2.y;
+        	}
+        	if(p2Name.equals("State")) {
+            	x2 = p2.x + 30 *  Math.cos(Math.toRadians(getangles()));
+        	}
+        }
+
+        if(p2Name.equals("State")) {
+        	y2 = p2.y - 30 *  Math.sin(Math.toRadians(getangles()));
         }
         
-        line2D = new Line2D.Double(x, y, x2, y2); 
+        line2D = new Line2D.Double(x1, y1, x2, y2); 
         g2.draw(line2D);
-        
-        int xm = (int)((x + x2) / 2);
-        int ym = (int)((y + y2) / 2);
-        g2.setPaint(Color.black);
-        g2.drawString(this.getText(), xm, ym);		//�u���W��
 		
-		
+
 	}
 	
 	public double getangles()		//�p����I��������
@@ -135,6 +201,7 @@ public class Note extends Decorator{
 		this.setPoint(p);
 		this.setX((int)p.getX());
 		this.setY((int)p.getY());
+		setBoundary();
 	}
 
 
