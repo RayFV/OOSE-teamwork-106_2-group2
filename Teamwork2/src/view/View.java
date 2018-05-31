@@ -242,8 +242,9 @@ public class View {
 		System.out.println("Add note btn clicked");
 		int id = controller.addNote(getSelectedItemID());
 		this.setSelectedItemID(id);
-		//this.showDialog();
+		this.showDialog();
 		this.repaint();
+		this.setSelectedItemID(-1);
 	}
 	
 	public void editClick(ActionEvent e) {

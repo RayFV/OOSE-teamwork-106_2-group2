@@ -57,7 +57,8 @@ public class State extends Component implements Serializable, Circle{
                 RenderingHints.VALUE_ANTIALIAS_ON);
 		
 		g.drawOval(b.x, b.y, b.width, b.height);		//�e��
-		 
+
+		g.setColor(Color.black);
 		g.drawString(getText(), (int)(b.getCenterX()-textWidth/2), (int)(b.getCenterY() + fm.getMaxAscent() /2));//�e��ron middle
 		
 		g.setColor(new Color(0,0,0,0));								//�T���M�z����
