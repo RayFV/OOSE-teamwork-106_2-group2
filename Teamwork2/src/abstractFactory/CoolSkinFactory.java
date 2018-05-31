@@ -7,16 +7,21 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
-import widget.button.CoolButton;
-import widget.label.CoolLabel;
-import widget.menubar.CoolMenuBar;
-import widget.panel.CoolPanel;
+import widget.skin.CoolSkin;
+import widget.skin.WidgetSkin;
+import widget.widget.Button;
+import widget.widget.Label;
+import widget.widget.MenuBar;
+import widget.widget.Panel;
 
 public class CoolSkinFactory implements AbstractSkinFactory{
+	private WidgetSkin coolSkin;
+	public CoolSkinFactory() {
+		this.coolSkin = new CoolSkin();
+	}
 
 	@Override
 	public JButton createButton(String text) {
-		// TODO Auto-generated method stub
 		String path = "Skin/coolSkin/";
 		Icon icon = null;
 		JLabel label;
@@ -32,35 +37,35 @@ public class CoolSkinFactory implements AbstractSkinFactory{
 			icon = new ImageIcon(path+"select.png");
 		}
 		
+		Button newButton = null;
 		if(icon != null) {
 			label = new JLabel(icon);
-			return new CoolButton(label);
+			newButton = new Button(label, coolSkin);
 		}
-		return new CoolButton(text);
+		else {
+			newButton = new Button(text, coolSkin);
+		}
+
+		return newButton;
 	}
 
 	@Override
 	public JPanel createPanel() {
-		// TODO Auto-generated method stub
-		return new CoolPanel();
+		return new Panel(coolSkin);
 	}
 
 	@Override
 	public JLabel createLabel(String text) {
-		// TODO Auto-generated method stub
-		return new CoolLabel(text);
+		return new Label(text, coolSkin);
 	}
 
 	@Override
-	public JLabel createLabel(String text, int aligment) {
-		// TODO Auto-generated method stub
-		return new CoolLabel(text, aligment);
+	public JLabel createLabel(String text, int alignment) {
+		return new Label(text, alignment, coolSkin);
 	}
 
 	@Override
 	public JMenuBar createMenuBar() {
-		// TODO Auto-generated method stub
-		return new CoolMenuBar();
+		return new MenuBar(coolSkin);
 	}
-
 }
