@@ -61,7 +61,7 @@ public class EditDialog extends JDialog implements ActionListener{
 		lblDescription.setBounds(10, 10, 234, 15);
 		contentPanel.add(lblDescription);
 		
-		lblName = skinFactory.createLabel("Name:");
+		lblName = skinFactory.createLabel("Text:");
 		lblName.setBounds(10, 47, 101, 15);
 		contentPanel.add(lblName);
 		
