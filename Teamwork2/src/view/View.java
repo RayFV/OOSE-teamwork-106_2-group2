@@ -459,6 +459,10 @@ public class View {
 		controller.addNewGroup(getGroupList().size()+1);
 		refreshGroupComboBoxItem(settingCbGroup, getGroupList());
 	}
+
+	public void copyState() {
+		controller.copyState(getSelectedItemID());
+	}
 	
 	public void refreshGroupComboBoxItem(JComboBox cb, ArrayList<Integer> list) {
 		cb.removeAllItems();

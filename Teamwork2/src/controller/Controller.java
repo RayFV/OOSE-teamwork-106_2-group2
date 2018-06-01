@@ -3,6 +3,7 @@ package controller;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 import command.AddMementoCmd;
 import command.RedoCmd;
@@ -90,6 +91,7 @@ public class Controller {
         restoreAction();
     }
 
+    //********************************//
 
 	public void setStateSubject(String color) {
 		mMdtr.setStateSubject(color);
@@ -169,7 +171,23 @@ public class Controller {
         mMdtr.removeComponent(id);
         System.out.println(decorator.getId());
 		return decorator.getId();
-	}
+    }
+    
+    public int copyState(int id) {
+        System.out.println("copy item" + id);
+
+        Component originState = mMdtr.getComponent(id);
+        if (! (originState instanceof State)) {
+            System.out.println("copy error: only can copy State!!");
+            return -1;
+        }
+        State newState = ((State) originState).copy();
+        newState.setId((new Date()).hashCode());
+        mMdtr.getGroup(newState.getGroup()).add(newState);
+
+        System.out.println("new item" + newState.getId());
+        return newState.getId();
+    }
     
 
     /**

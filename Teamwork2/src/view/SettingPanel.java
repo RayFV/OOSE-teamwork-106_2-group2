@@ -42,6 +42,7 @@ public class SettingPanel{
 	JPanel panelState ;
 	
 	JButton addGroupButton;
+	JButton copyButton;
 	
 	View vMdtr = View.getInstance();
 	
@@ -75,6 +76,7 @@ public class SettingPanel{
 		lblTransitionColor = skinFactory.createLabel("Color");
 		
 		addGroupButton = skinFactory.createButton("Add Group");
+		copyButton = skinFactory.createButton("Copy");
 		
 		Border bdr = BorderFactory.createEtchedBorder(Color.black,Color.black);
 		Border titlebdr = BorderFactory.createTitledBorder(bdr, "Setting", 0, 0, null, Color.BLACK);
@@ -92,6 +94,7 @@ public class SettingPanel{
 		panelGroup.add(comboGroupColor);
 		//comboGroupColor.setSelectedIndex(-1);
 		panelGroup.add(addGroupButton);
+		panelGroup.add(copyButton);
 		panel.add(panelGroup);
 		
 		comboGroupColor.addActionListener (new ChangeGroupColorListener());
@@ -102,6 +105,11 @@ public class SettingPanel{
 		    }
 		});
 		
+		copyButton.addActionListener (new ActionListener () {
+		    public void actionPerformed(ActionEvent e) {
+		        vMdtr.copyState();
+		    }
+		});
 		
 		panelState.setBorder(new TitledBorder(null, "State", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panelState.add(lblStateColor);

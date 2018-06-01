@@ -13,7 +13,7 @@ import java.io.Serializable;
 import memento.ObjectStatusMemento;
 import memento.StateStatusMemento;;
 
-public class State extends Component implements Serializable, Circle{
+public class State extends Component implements Serializable, Circle, Cloneable {
 	private Rectangle b;
 	private float line;
 	
@@ -100,5 +100,22 @@ public class State extends Component implements Serializable, Circle{
 		super.restore(previousMemento);
 		this.b = previousMemento.getB();
 		this.line = previousMemento.getLine();
+	}
+
+
+	@Override
+	protected State clone() throws CloneNotSupportedException {
+		return (State) super.clone();
+	}
+
+	public State copy() {
+		try {
+			return this.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			
+		}
+
+		return null;
 	}
 }
