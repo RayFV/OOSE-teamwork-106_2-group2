@@ -162,6 +162,25 @@ public class StateDiagram extends Component {
 		Component dComponent = decorator.getComponent();
 		this.componentList.add(dComponent);
 	}
+	/**
+	 * 移除指定的Component物件
+	 * 不確認Decorator
+	 */
+	public boolean removeComponent(Component removeC) {
+		boolean success = this.componentList.remove(removeC);
+		if (! success) {
+			for (Component c: this.componentList) {
+				if (c instanceof StateDiagram) {
+					success = ((StateDiagram) c).removeComponent(removeC);
+					if (success) {
+						break;
+					}
+				}
+			}
+		}
+
+		return success;
+	}
 
 	@Override
 	/**
