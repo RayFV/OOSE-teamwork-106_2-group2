@@ -30,6 +30,12 @@ public class Transition extends Component implements Serializable{
 		this.setText(text);
 		this.s1 = s1;
 		this.s2 = s2;
+		int x = (s1.getX()+s2.getX())/2;
+		int y = (s1.getY()+s2.getY())/2;
+		setX(x);
+		setY(y);
+		setPoint(new Point(x,y));
+		System.out.println("x:" + x + "  y:" + y);
 	}
 
 	@Override
@@ -54,6 +60,12 @@ public class Transition extends Component implements Serializable{
 		
 		Point p1 = s1.getPoint();
 		Point p2 = s2.getPoint();
+		int lineX = (s1.getX()+s2.getX())/2;
+		int lineY = (s1.getY()+s2.getY())/2;
+		setX(lineX);
+		setY(lineY);
+		Point p = new Point(lineX, lineY);
+		setPoint(p);
 		
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setStroke(new BasicStroke(2));							//�u���ʲ�
@@ -131,12 +143,8 @@ public class Transition extends Component implements Serializable{
 		return this.line.intersects(p.getX(), p.getY(), 10, 10);		//�e,��
 	}
 	
-	public Point getPoint() {return null;}
-	public void ChangePoint(Point p) {}
+	//public Point getPoint() {return null;}
 	
-	public String getType() {
-		return "trans";
-	}
 	
 	public Object clone(){
 		Component de = null;

@@ -101,7 +101,7 @@ public abstract class Component implements Observer {
     }
 
     public Point getPoint() {
-		return point;
+		return this.point;
 	}
 	
 	public void setPoint(Point p) {

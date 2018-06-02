@@ -29,8 +29,8 @@ public class Note extends Decorator{
 		super(comp);
 		setText(text);
 		setPoint(p);
-		setX(p.x);
-		setY(p.y);
+		setX(p.x + 30);
+		setY(p.y + 30);
 		width = 200;
 		height = 100;
 		line = 2;
@@ -77,9 +77,9 @@ public class Note extends Decorator{
 		String p2Name = super.component.getClassName();
 		
 		Graphics2D g2 = (Graphics2D)g;
-		g2.setStroke(new BasicStroke(2));							//�u���ʲ�
+		g2.setStroke(new BasicStroke(1));							
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                            RenderingHints.VALUE_ANTIALIAS_ON);		//�ϥΨ������ﵽ��ܽ�q
+                            RenderingHints.VALUE_ANTIALIAS_ON);		
   
         g2.setPaint(getColor());
         
@@ -144,6 +144,11 @@ public class Note extends Decorator{
 
         if(p2Name.equals("State")) {
         	y2 = p2.y - 30 *  Math.sin(Math.toRadians(getangles()));
+        }
+        
+        if(p2Name.equals("Transition")) {
+        	x2 = p2.x;
+        	y2 = p2.y;
         }
         
         line2D = new Line2D.Double(x1, y1, x2, y2); 
