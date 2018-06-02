@@ -127,14 +127,40 @@ public class StateDiagram extends Component {
 	 * 將符合id的Component從list移除
 	 * @param id =要移除的component的id
 	 */
-	public void remove(int id) {
+	public Component remove(int id) {
 		Component removeC = this.getComponent(id);
+		if (removeC == null) {
+			return null;
+		}
+
 		boolean success = this.componentList.remove(removeC);
-		if ((! success) && (removeC != null)) {
+		if (! success) {
+			removeC = null;
 			for (Component c: this.componentList) {
-				c.remove(id);
+				removeC = c.remove(id);
+				if (removeC != null) {
+					if (c instanceof Decorator) {
+						this.componentList.remove(c);
+						if (removeC instanceof Decorator) {
+							this.saveDecoratorComponent((Decorator) removeC);
+						}
+					}
+					break;
+				}
 			}
 		}
+		else if (removeC instanceof Decorator) {
+			this.saveDecoratorComponent((Decorator) removeC);
+		}
+
+		return removeC;
+	}
+	/**
+	 * 當移除Decorator時調用這個來保存Decorator底下的Component
+	 */
+	private void saveDecoratorComponent(Decorator decorator) {
+		Component dComponent = decorator.getComponent();
+		this.componentList.add(dComponent);
 	}
 
 	@Override
