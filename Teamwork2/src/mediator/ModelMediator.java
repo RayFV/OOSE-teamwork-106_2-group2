@@ -188,6 +188,16 @@ public class ModelMediator {
 		stateDiagram.remove(selectedItemID);
 		System.out.println("deleted item" + selectedItemID);
 	}
+	//remove component from state diagram by Object
+	public void removeComponent(Component removeC) {
+		boolean success = stateDiagram.removeComponent(removeC);
+		if (success) {
+			System.out.println("deleted item" + removeC.getId());
+		}
+		else {
+			System.out.println("deleted error: item" + removeC.getId());
+		}
+	}
 
 
 	public void saveAction() {

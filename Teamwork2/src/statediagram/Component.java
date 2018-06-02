@@ -164,9 +164,12 @@ public abstract class Component implements Observer {
      */
     public void add(Component newComponent) {}
     /**
-     * do nothing
+     * 移除指定的id
+     * @return 被移除的物件
      */
-    public void remove(int id) {}
+    public Component remove(int id) {
+        return null;
+    }
 
     /**
      * do nothing
