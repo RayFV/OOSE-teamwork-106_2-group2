@@ -40,6 +40,7 @@ public class View {
 	private JButton buttonAddnote;
 	private JButton buttonDelete;
 	private JButton buttonEdit;
+	private JButton btnCopy;
 
 	private DrawCanvas drawCanvas;
 	private MouseState currentState = ChosenSelect.getInstance(); //singleton
@@ -437,6 +438,7 @@ public class View {
 			this.buttonAddnote.setEnabled(true);
 			this.buttonDelete.setEnabled(true);
 			this.buttonEdit.setEnabled(true);
+			this.btnCopy.setEnabled(true);
 			this.menuDelete.setEnabled(true);
 			this.menuModify.setEnabled(true);
 		}
@@ -444,6 +446,7 @@ public class View {
 			this.buttonAddnote.setEnabled(false);
 			this.buttonDelete.setEnabled(false);
 			this.buttonEdit.setEnabled(false);
+			this.btnCopy.setEnabled(false);
 			this.menuDelete.setEnabled(false);
 			this.menuModify.setEnabled(false);
 		}
@@ -522,6 +525,11 @@ public class View {
 	public void setSkinFactory(AbstractSkinFactory skinFactory) {
 		// TODO Auto-generated method stub
 		this.skinFactory = skinFactory;
+	}
+
+	public void registerButtonCopy(JButton btnCopy) {
+		// TODO Auto-generated method stub
+		this.btnCopy = btnCopy;
 	}
 
 

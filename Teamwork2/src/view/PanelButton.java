@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -28,6 +30,7 @@ public class PanelButton{
 	private JButton btnAddNote;
 	private JButton btnDelete;
 	private JButton btnEdit;
+	private JButton btnCopy;
 	private View view = View.getInstance();
 	
 	public PanelButton(AbstractSkinFactory skinFactory, JPanel panel){
@@ -40,6 +43,7 @@ public class PanelButton{
 		btnAddNote = skinFactory.createButton("Add Note");
 		btnDelete = skinFactory.createButton("Delete");
 		btnEdit = skinFactory.createButton("Edit");
+		btnCopy = skinFactory.createButton("Copy");
 		
 		panel.add(btnState);
 		panel.add(btnTransition);
@@ -47,6 +51,7 @@ public class PanelButton{
 		panel.add(btnAddNote);
 		panel.add(btnDelete);
 		panel.add(btnEdit);
+		panel.add(btnCopy);
 		
 		btnState.addActionListener(new BtnStateListener());
 		btnTransition.addActionListener(new BtnTransListener());
@@ -54,6 +59,11 @@ public class PanelButton{
 		btnAddNote.addActionListener(new BtnAddNoteListener());
 		btnDelete.addActionListener(new DeleteListener());
 		btnEdit.addActionListener(new EditListener());
+		btnCopy.addActionListener (new ActionListener () {
+		    public void actionPerformed(ActionEvent e) {
+		        view.copyState();
+		    }
+		});
 		
 		view.registerButtonDelete(btnDelete);
 		view.registerButtonEdit(btnEdit);
@@ -61,6 +71,7 @@ public class PanelButton{
 		view.registerButtonAddNote(btnAddNote);
 		view.registerButtonState(btnState);
 		view.registerButtonTransition(btnTransition);
+		view.registerButtonCopy(btnCopy);
 		
 		
 	}
