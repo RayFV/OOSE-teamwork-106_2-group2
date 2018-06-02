@@ -162,14 +162,14 @@ public class Controller {
     }
     
 	public int addNote(int id) {
-		// TODO Auto-generated method stub
 		System.out.println(id);
 		Component comp = this.getComponent(id);
 		Component decorator = new Note("", comp.getPoint(), comp);
         Component group1 = mMdtr.getGroup(1);
+        mMdtr.removeComponent(comp);
         group1.add(decorator);
-        mMdtr.removeComponent(id);
         System.out.println(decorator.getId());
+
 		return decorator.getId();
     }
     
@@ -198,13 +198,13 @@ public class Controller {
     public void changeGroup(int id, int newGroupNumber) {
         Component c = this.getComponent(id);
         int oldGroupNumber = c.getGroup();
-        Component oldGroup = mMdtr.getGroup(oldGroupNumber);
+        StateDiagram oldGroup = (StateDiagram)(mMdtr.getGroup(oldGroupNumber));
         Component newGroup = mMdtr.getGroup(newGroupNumber);
         if (newGroup == null) {
             this.addNewGroup(newGroupNumber);
             newGroup = mMdtr.getGroup(newGroupNumber);
         }
-        oldGroup.remove(id);
+        oldGroup.removeComponent(c);
         newGroup.add(c);
         this.changeComponentToSameColor(c, newGroup);
         c.setGroup(newGroupNumber);

@@ -44,6 +44,12 @@ public abstract class Decorator extends Component{
 	}
 
 	@Override
+	public Component remove(int id) {
+		//Decorator沒辦法移除自己的component, 直接回傳找的結果
+		return this.getComponent(id);
+	}
+
+	@Override
 	public void restore(ObjectStatusMemento previousMemento) {
 		super.restore(previousMemento);
 		this.component = ((DecoratorStatusMemento) previousMemento).getComponent();
