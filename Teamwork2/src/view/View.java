@@ -465,6 +465,7 @@ public class View {
 
 	public void copyState() {
 		controller.copyState(getSelectedItemID());
+		this.repaint();
 	}
 	
 	public void refreshGroupComboBoxItem(JComboBox cb, ArrayList<Integer> list) {

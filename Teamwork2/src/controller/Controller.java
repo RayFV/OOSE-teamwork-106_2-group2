@@ -183,6 +183,8 @@ public class Controller {
         }
         State newState = ((State) originState).copy();
         newState.setId((new Date()).hashCode());
+        newState.setX(60);
+        newState.setY(60);
         mMdtr.getGroup(newState.getGroup()).add(newState);
 
         System.out.println("new item" + newState.getId());
