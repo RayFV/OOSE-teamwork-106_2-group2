@@ -105,7 +105,14 @@ public class State extends Component implements Serializable, Circle, Cloneable 
 
 	@Override
 	protected State clone() throws CloneNotSupportedException {
-		return (State) super.clone();
+		State myClone = (State) super.clone();
+		myClone.attachSubject();
+		myClone.setBoundary();
+		myClone.setColor(new Color(getColor().getRGB()));
+		myClone.setText(new String(getText()));
+		myClone.setPoint(new Point(getPoint()));
+		
+		return myClone;
 	}
 
 	public State copy() {
@@ -113,7 +120,7 @@ public class State extends Component implements Serializable, Circle, Cloneable 
 			return this.clone();
 		}
 		catch (CloneNotSupportedException e) {
-			
+			System.out.println("copy error");
 		}
 
 		return null;
