@@ -10,4 +10,3 @@ You can change file [Skin.txt](/Skin.txt) to change skin.
 
 ### cool skin
 ![skin-cool](reeadme-picture/skin-cool.jpg)
-
