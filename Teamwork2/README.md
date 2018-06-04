@@ -1,12 +1,12 @@
 # State Diagram Editor
-![State_Diagram_Editor](/reeadme_picture/State_Diagram_Editor.jpg)
+![State_Diagram_Editor](reeadmePicture/StateDiagramEditor.jpg)
 
 
 ## Skin
 You can change file [Skin.txt](/Skin.txt) to change skin.
 
 ### normal skin
-![skin-normal](/reeadme_picture/skin-normal.jpg)
+![skin-normal](reeadmePicture/skinNormal.jpg)
 
 ### cool skin
-![skin-cool](reeadme_picture/skin-cool.jpg)
+![skin-cool](reeadmePicture/skinCool.jpg)
